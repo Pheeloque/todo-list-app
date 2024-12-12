@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import TaskInput from "./components/TaskInput";
+import TaskList from "./components/TaskList";
 
 function App() {
   const [task, setTask] = useState("");
@@ -13,7 +15,6 @@ function App() {
     if (task.trim() !== "") {
       const newTask = { id: Date.now(), text: task.trim() };
       setTasksList((prevTasks) => [...prevTasks, newTask]);
-      // console.log(`Добавлена задача: ${task}`);
       setTask("");
     }
   };
@@ -29,59 +30,37 @@ function App() {
   };
 
   const handleSaveEdit = () => {
-    if (!editingTask?.text.trim()) return;
+    const trimmedText = editingTask?.text.trim();
+    if (!trimmedText) return;
+
     setTasksList((prevTasks) =>
-      prevTasks.map((task) => (task.id === editingTask.id ? editingTask : task))
+      prevTasks.map((task) =>
+        task.id === editingTask.id ? { ...task, text: trimmedText } : task
+      )
     );
     setEditingTask(null);
+  };
+
+  const handleChangeEdit = (newText) => {
+    setEditingTask({ ...editingTask, text: newText });
   };
 
   return (
     <div>
       <h1>To-Do list App</h1>
-      <div>
-        <input
-          type="text"
-          placeholder="Введите задачу"
-          value={task}
-          onChange={handleInputChange}
-        />
-        <button onClick={handleAddTask}>Добавить</button>
-      </div>
-      <ul>
-        {tasksList.map((task) => (
-          <li key={task.id}>
-            {editingTask?.id === task.id ? (
-              <>
-                <input
-                  type="text"
-                  value={editingTask.text}
-                  onChange={(event) =>
-                    setEditingTask({
-                      id: editingTask.id,
-                      text: event.target.value,
-                    })
-                  }
-                />
-                <button
-                  onClick={handleSaveEdit}
-                  disabled={!editingTask?.text.trim()}
-                >
-                  Сохранить
-                </button>
-              </>
-            ) : (
-              task.text
-            )}
-            {editingTask?.id !== task.id && (
-              <button onClick={() => handleEditTask(task)}>
-                Редактировать
-              </button>
-            )}
-            <button onClick={() => handleDeleteTask(task.id)}>Удалить</button>
-          </li>
-        ))}
-      </ul>
+      <TaskInput
+        task={task}
+        onTaskChange={handleInputChange}
+        onAddTask={handleAddTask}
+      />
+      <TaskList
+        tasksList={tasksList}
+        editingTask={editingTask}
+        onEditTask={handleEditTask}
+        onDeleteTask={handleDeleteTask}
+        onSaveEdit={handleSaveEdit}
+        onChangeEdit={handleChangeEdit}
+      />
     </div>
   );
 }
