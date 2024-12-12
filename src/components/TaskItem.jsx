@@ -16,6 +16,7 @@ function TaskItem({
       {editingTask?.id === task.id ? (
         <>
           <input
+            className={styles.inputField}
             type="text"
             value={editingTask.text}
             onChange={(event) => onChangeEdit(event.target.value)}

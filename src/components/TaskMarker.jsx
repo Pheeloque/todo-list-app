@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/TaskMarker.module.css";
 
 function TaskMarker({ marker, onChangeMarker }) {
-  const markerOptions = ["Выполнено", "В процессе", "Отложено", "Провалено"];
+  const markerOptions = ["В процессе", "Выполнено", "Отложено", "Провалено"];
 
   const handleChange = (event) => {
     onChangeMarker(event.target.value);
