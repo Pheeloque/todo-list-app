@@ -1,4 +1,6 @@
 import React from "react";
+import TaskMarker from "./TaskMarker";
+import styles from "../styles/TaskItem.module.css";
 
 function TaskItem({
   task,
@@ -7,9 +9,10 @@ function TaskItem({
   editingTask,
   onSaveEdit,
   onChangeEdit,
+  onChangeMarker,
 }) {
   return (
-    <li key={task.id}>
+    <li key={task.id} className={styles.taskItem}>
       {editingTask?.id === task.id ? (
         <>
           <input
@@ -17,17 +20,29 @@ function TaskItem({
             value={editingTask.text}
             onChange={(event) => onChangeEdit(event.target.value)}
           />
-          <button onClick={onSaveEdit} disabled={!editingTask?.text.trim()}>
-            Сохранить
-          </button>
+          <div className={styles.taskItemButtons}>
+            <TaskMarker
+              marker={editingTask.marker}
+              onChangeMarker={(newMarker) => onChangeMarker(task.id, newMarker)}
+            />
+            <button onClick={onSaveEdit} disabled={!editingTask?.text.trim()}>
+              Сохранить
+            </button>
+          </div>
         </>
       ) : (
-        task.text
+        <>
+          <div className={styles.taskText}>{task.text}</div>
+          <div className={styles.taskItemButtons}>
+            <TaskMarker
+              marker={task.marker}
+              onChangeMarker={(newMarker) => onChangeMarker(task.id, newMarker)}
+            />
+            <button onClick={() => onEditTask(task)}>Редактировать</button>
+            <button onClick={() => onDeleteTask(task.id)}>Удалить</button>
+          </div>
+        </>
       )}
-      {editingTask?.id !== task.id && (
-        <button onClick={() => onEditTask(task)}>Редактировать</button>
-      )}
-      <button onClick={() => onDeleteTask(task.id)}>Удалить</button>
     </li>
   );
 }

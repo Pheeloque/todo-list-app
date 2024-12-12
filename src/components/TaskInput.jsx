@@ -1,15 +1,19 @@
 import React from "react";
+import styles from "../styles/TaskInput.module.css";
 
 function TaskInput({ task, onTaskChange, onAddTask }) {
   return (
-    <div>
+    <div className={styles.inputContainer}>
       <input
         type="text"
         placeholder="Введите задачу"
         value={task}
         onChange={onTaskChange}
+        className={styles.inputField}
       />
-      <button onClick={onAddTask}>Добавить</button>
+      <button onClick={onAddTask} className={styles.addButton}>
+        Добавить
+      </button>
     </div>
   );
 }

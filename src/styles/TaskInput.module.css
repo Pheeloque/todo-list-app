@@ -1,0 +1,45 @@
+.inputContainer {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.inputField {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+.addButton {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 150px;
+}
+
+.addButton:hover {
+  background-color: #45a049;
+}
+
+@media (max-width: 600px) {
+  .inputContainer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .inputField,
+  .addButton {
+    width: 100%;
+    max-width: none;
+  }
+}

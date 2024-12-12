@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TaskInput from "./components/TaskInput";
 import TaskList from "./components/TaskList";
+import styles from "./styles/App.module.css";
 
 function App() {
   const [task, setTask] = useState("");
@@ -45,8 +46,16 @@ function App() {
     setEditingTask({ ...editingTask, text: newText });
   };
 
+  const handleChangeMarker = (taskId, newMarker) => {
+    setTasksList((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId ? { ...task, marker: newMarker } : task
+      )
+    );
+  };
+
   return (
-    <div>
+    <div className={styles.container}>
       <h1>To-Do list App</h1>
       <TaskInput
         task={task}
@@ -60,6 +69,7 @@ function App() {
         onDeleteTask={handleDeleteTask}
         onSaveEdit={handleSaveEdit}
         onChangeEdit={handleChangeEdit}
+        onChangeMarker={handleChangeMarker}
       />
     </div>
   );
