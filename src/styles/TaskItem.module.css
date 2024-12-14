@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+  margin-top: 10px;
   margin-bottom: 10px;
   background-color: white;
   border: 1px solid #ddd;
@@ -39,7 +40,7 @@
   font-size: 1em;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100%;
+  width: 30%;
   height: 30px;
   flex-grow: 1;
 }

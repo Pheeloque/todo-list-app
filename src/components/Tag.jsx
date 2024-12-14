@@ -3,10 +3,10 @@ import styles from "../styles/Tag.module.css";
 
 function Tag({ tag, onDelete }) {
   return (
-    <span className="styles tag">
+    <span className={styles.tag}>
       {tag}
       {onDelete && (
-        <button className={styles.onDelete} onClick={() => onDelete(tag)}>
+        <button className={styles.deleteButton} onClick={() => onDelete(tag)}>
           x
         </button>
       )}

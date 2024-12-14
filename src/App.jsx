@@ -54,6 +54,32 @@ function App() {
     );
   };
 
+  const handleAddTag = (taskId, newTag) => {
+    setTasksList((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId && !(task.tags || []).includes(newTag)
+          ? {
+              ...task,
+              tags: [...(task.tags || []), newTag],
+            }
+          : task
+      )
+    );
+  };
+
+  const handleDeleteTag = (taskId, tagToDelete) => {
+    setTasksList((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              tags: (task.tags || []).filter((tag) => tag !== tagToDelete),
+            }
+          : task
+      )
+    );
+  };
+
   return (
     <div className={styles.container}>
       <h1>To-Do list App</h1>
@@ -70,6 +96,8 @@ function App() {
         onSaveEdit={handleSaveEdit}
         onChangeEdit={handleChangeEdit}
         onChangeMarker={handleChangeMarker}
+        onAddTag={handleAddTag}
+        onDeleteTag={handleDeleteTag}
       />
     </div>
   );

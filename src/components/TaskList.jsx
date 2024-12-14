@@ -10,6 +10,8 @@ function TaskList({
   onSaveEdit,
   onChangeEdit,
   onChangeMarker,
+  onAddTag,
+  onDeleteTag,
 }) {
   return (
     <ul className={styles.taskList}>
@@ -23,6 +25,8 @@ function TaskList({
           onSaveEdit={onSaveEdit}
           onChangeEdit={onChangeEdit}
           onChangeMarker={onChangeMarker}
+          onAddTag={onAddTag}
+          onDeleteTag={onDeleteTag}
         />
       ))}
     </ul>
