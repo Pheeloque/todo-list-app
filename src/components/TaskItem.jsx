@@ -17,7 +17,7 @@ function TaskItem({
   return (
     <li key={task.id} className={styles.taskItem}>
       {editingTask?.id === task.id ? (
-        <div className={styles.taskContent}>
+        <div className={styles.taskActions}>
           <input
             type="text"
             value={editingTask.text}
@@ -33,7 +33,7 @@ function TaskItem({
           </button>
         </div>
       ) : (
-        <div className={styles.taskContent}>
+        <div className={styles.taskActions}>
           <div className={styles.taskText}>{task.text}</div>
           <TaskMarker
             marker={task.marker}
