@@ -1,7 +1,6 @@
 .taskItem {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -12,37 +11,29 @@
   width: 100%;
 }
 
+.taskContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
 .taskText {
   font-family: "Roboto", sans-serif;
   font-size: 1em;
   flex-grow: 1;
-  padding-right: 10px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 0;
+}
+
+.editInput {
+  flex-grow: 1;
   min-width: 0;
-}
-
-.taskItemButtons {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.taskMarker {
-  margin-right: 10px;
-}
-
-.inputField {
-  margin-right: 10px;
-  padding: 10px;
+  padding: 6px;
   font-size: 1em;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 30%;
-  height: 30px;
-  flex-grow: 1;
 }
 
 button {
@@ -64,33 +55,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-@media (max-width: 600px) {
-  .taskItem {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .taskText {
-    padding-right: 0;
-    margin-bottom: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-    min-width: 0;
-  }
-
-  .taskItemButtons {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .inputField {
-    margin-bottom: 10px;
-    padding: 10px;
-    font-size: 1em;
-    width: 100%;
-    height: 30px;
-    flex-grow: 1;
-  }
+.taskMarker {
+  margin-right: 10px;
 }

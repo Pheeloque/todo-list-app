@@ -6,7 +6,10 @@ function TagList({ tags = [], onAddTag, onDeleteTag }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+    const value = event.target.value;
+    if (value.length <= 20) {
+      setInputValue(value);
+    }
   };
 
   const handleKeyDown = (event) => {
@@ -23,25 +26,27 @@ function TagList({ tags = [], onAddTag, onDeleteTag }) {
           <Tag key={tag} tag={tag} onDelete={onDeleteTag} />
         ))}
       </div>
-      <input
-        type="text"
-        value={inputValue}
-        placeholder="Добавить тег"
-        onChange={handleInputChange}
-        onKeyDown={handleKeyDown}
-        className={styles.input}
-      />
-      <button
-        onClick={() => {
-          if (inputValue.trim()) {
-            onAddTag(inputValue.trim());
-            setInputValue("");
-          }
-        }}
-        className={styles.addButton}
-      >
-        +
-      </button>
+      <div className={styles.inputContainer}>
+        <input
+          type="text"
+          value={inputValue}
+          placeholder="Добавить тег"
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          className={styles.input}
+        />
+        <button
+          onClick={() => {
+            if (inputValue.trim() && inputValue.trim().length <= 20) {
+              onAddTag(inputValue.trim());
+              setInputValue("");
+            }
+          }}
+          className={styles.addButton}
+        >
+          +
+        </button>
+      </div>
     </>
   );
 }

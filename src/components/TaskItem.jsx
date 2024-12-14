@@ -15,51 +15,40 @@ function TaskItem({
   onDeleteTag,
 }) {
   return (
-    <>
-      <li key={task.id} className={styles.taskItem}>
-        {editingTask?.id === task.id ? (
-          <>
-            <input
-              type="text"
-              value={editingTask.text}
-              onChange={(event) => onChangeEdit(event.target.value)}
-              className={styles.inputField}
-            />
-            <div className={styles.taskMarker}>
-              <TaskMarker
-                marker={editingTask.marker}
-                onChangeMarker={(newMarker) =>
-                  onChangeMarker(task.id, newMarker)
-                }
-              />
-              <button onClick={onSaveEdit} disabled={!editingTask?.text.trim()}>
-                Сохранить
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className={styles.taskText}>{task.text}</div>
-
-            <div className={styles.taskItemButtons}>
-              <TaskMarker
-                marker={task.marker}
-                onChangeMarker={(newMarker) =>
-                  onChangeMarker(task.id, newMarker)
-                }
-              />
-              <button onClick={() => onEditTask(task)}>Редактировать</button>
-              <button onClick={() => onDeleteTask(task.id)}>Удалить</button>
-            </div>
-          </>
-        )}
-      </li>
+    <li key={task.id} className={styles.taskItem}>
+      {editingTask?.id === task.id ? (
+        <div className={styles.taskContent}>
+          <input
+            type="text"
+            value={editingTask.text}
+            onChange={(event) => onChangeEdit(event.target.value)}
+            className={styles.editInput}
+          />
+          <TaskMarker
+            marker={editingTask.marker}
+            onChangeMarker={(newMarker) => onChangeMarker(task.id, newMarker)}
+          />
+          <button onClick={onSaveEdit} disabled={!editingTask?.text.trim()}>
+            Сохранить
+          </button>
+        </div>
+      ) : (
+        <div className={styles.taskContent}>
+          <div className={styles.taskText}>{task.text}</div>
+          <TaskMarker
+            marker={task.marker}
+            onChangeMarker={(newMarker) => onChangeMarker(task.id, newMarker)}
+          />
+          <button onClick={() => onEditTask(task)}>Редактировать</button>
+          <button onClick={() => onDeleteTask(task.id)}>Удалить</button>
+        </div>
+      )}
       <TagList
         tags={task.tags || []}
         onAddTag={(newTag) => onAddTag(task.id, newTag)}
         onDeleteTag={(tagToDelete) => onDeleteTag(task.id, tagToDelete)}
       />
-    </>
+    </li>
   );
 }
 
